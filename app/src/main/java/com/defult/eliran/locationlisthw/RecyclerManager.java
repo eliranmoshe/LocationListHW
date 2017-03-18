@@ -88,7 +88,7 @@ List<LocationObj> allLoc;
                     }
 
 
-                   // Toast.makeText(context, , Toast.LENGTH_SHORT).show();
+                   //;; Toast.makeText(context, , Toast.LENGTH_SHORT).show();
                 }
             });
             CityNameTV.setText(locationObj.Cityname);
