@@ -81,9 +81,10 @@ List<LocationObj> allLoc;
                         LngItemTV.setText(" lng: " + locationObj.lng);
                         isexpand=true;
                     }
-                    if (isexpand==true)
+                    else if (isexpand==true)
                     {
                         expandableRelativeLayout.collapse();
+                        isexpand=false;
                     }
 
 
