@@ -9,6 +9,10 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.textservice.TextInfo;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.levelupstudio.recyclerview.ExpandableRecyclerView;
 
 import java.util.List;
 
@@ -49,16 +53,43 @@ List<LocationObj> allLoc;
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView CityNameTV;
+        TextView LatItemTV;
+        TextView LngItemTV;
+        ExpandableRelativeLayout expandableRelativeLayout;
+        boolean isexpand=false;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
+            expandableRelativeLayout= (ExpandableRelativeLayout) itemView.findViewById(R.id.ExpandableLatLngLayout);
+            expandableRelativeLayout.toggle();
             CityNameTV= (TextView) itemView.findViewById(R.id.CItyNameTV);
+            LatItemTV= (TextView) itemView.findViewById(R.id.LatItemTV);
+            LngItemTV= (TextView) itemView.findViewById(R.id.LngItemTV);
+
 
         }
 
-        public  void bindData(LocationObj locationObj)
+        public  void bindData(final LocationObj locationObj)
         {
+            CityNameTV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isexpand==false) {
+                        expandableRelativeLayout.expand();
+                        LatItemTV.setText("lat: " + locationObj.lat);
+                        LngItemTV.setText(" lng: " + locationObj.lng);
+                        isexpand=true;
+                    }
+                    if (isexpand==true)
+                    {
+                        expandableRelativeLayout.collapse();
+                    }
+
+
+                   // Toast.makeText(context, , Toast.LENGTH_SHORT).show();
+                }
+            });
             CityNameTV.setText(locationObj.Cityname);
         }
     }

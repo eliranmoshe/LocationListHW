@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.orm.SugarContext;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 public class LocationListAct extends AppCompatActivity {
 ArrayList<LocationObj>allLoc;
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
