@@ -5,24 +5,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityNodeInfo;
-import android.view.textservice.TextInfo;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
-import com.levelupstudio.recyclerview.ExpandableRecyclerView;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
 
 public class RecyclerManager extends RecyclerView.Adapter<RecyclerManager.ViewHolder> {
-List<LocationObj> allLoc;
+    List<LocationObj> allLoc;
     Context context;
     LinearLayout linearLayout;
+    MapFragment mapFragment;
 
-    public RecyclerManager(List<LocationObj> allLoc, Context context, LinearLayout linearLayout) {
+    public RecyclerManager(List<LocationObj> allLoc, Context context, LinearLayout linearLayout, MapFragment mapFragment) {
+        this.mapFragment=mapFragment;
         this.allLoc = allLoc;
         this.context = context;
         this.linearLayout = linearLayout;
@@ -56,6 +63,9 @@ List<LocationObj> allLoc;
         TextView LatItemTV;
         TextView LngItemTV;
         ExpandableRelativeLayout expandableRelativeLayout;
+        LatLng latLng;
+        CameraUpdate update;
+        GoogleMap CurrentGoogleMap;
 
 
         public ViewHolder(View itemView) {
@@ -75,25 +85,38 @@ List<LocationObj> allLoc;
                 @Override
                 public void onClick(View v) {
                     if (!expandableRelativeLayout.isExpanded()) {
-                        expandableRelativeLayout.setDuration(3000);
-                        expandableRelativeLayout.expand();
+                   mapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(GoogleMap googleMap) {
+                            googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-                        LatItemTV.setText("lat: " + locationObj.lat);
-                        LngItemTV.setText(" lng: " + locationObj.lng);
-                    }
-                    else if (expandableRelativeLayout.isExpanded())
-                    {
-                        expandableRelativeLayout.collapse();
-                    }
+                            latLng = new LatLng(locationObj.lat, locationObj.lng);
+                            update = CameraUpdateFactory.newLatLngZoom(latLng, 17);
 
+                            CurrentGoogleMap = googleMap;
+                            googleMap.addMarker(new MarkerOptions()
+                                    .position(latLng)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-                   //;//; Toast.makeText(context, , Toast.LENGTH_SHORT).show();
+                            googleMap.moveCamera(update);
+
+                        }
+                    });
+
+                                expandableRelativeLayout.expand();
+
+                                LatItemTV.setText("lat: " + locationObj.lat);
+                                LngItemTV.setText(" lng: " + locationObj.lng);
+                            } else if (expandableRelativeLayout.isExpanded()) {
+                                expandableRelativeLayout.collapse();
+                            }
+                        }
+                    });
+                    CityNameTV.setText(locationObj.Cityname);
                 }
-            });
-            CityNameTV.setText(locationObj.Cityname);
-        }
-    }
-    {
 
-    }
+
+            }
+
+
 }
