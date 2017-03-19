@@ -56,7 +56,6 @@ List<LocationObj> allLoc;
         TextView LatItemTV;
         TextView LngItemTV;
         ExpandableRelativeLayout expandableRelativeLayout;
-        boolean isexpand=false;
 
 
         public ViewHolder(View itemView) {
@@ -75,16 +74,16 @@ List<LocationObj> allLoc;
             CityNameTV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isexpand==false) {
+                    if (!expandableRelativeLayout.isExpanded()) {
+                        expandableRelativeLayout.setDuration(3000);
                         expandableRelativeLayout.expand();
+
                         LatItemTV.setText("lat: " + locationObj.lat);
                         LngItemTV.setText(" lng: " + locationObj.lng);
-                        isexpand=true;
                     }
-                    else if (isexpand==true)
+                    else if (expandableRelativeLayout.isExpanded())
                     {
                         expandableRelativeLayout.collapse();
-                        isexpand=false;
                     }
 
 
