@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ExpandableLayout"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -23,32 +25,35 @@
             android:textSize="24sp" />
     </LinearLayout>
 
-    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+    <com.github.aakira.expandablelayout.ExpandableLinearLayout
         android:id="@+id/ExpandableLatLngLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout"
-        android:background="@android:color/holo_blue_dark">
+        android:background="@android:color/holo_blue_dark"
+        android:orientation="vertical"
+        android:weightSum="2"
+        app:ael_expanded="false">
 
         <TextView
             android:id="@+id/LatItemTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentLeft="false"
             android:layout_alignParentRight="false"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentStart="false"
             android:layout_below="@+id/CItyNameTV"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/LngItemTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="TextView" />
-    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+    </com.github.aakira.expandablelayout.ExpandableLinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

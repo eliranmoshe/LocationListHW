@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.github.aakira.expandablelayout.ExpandableLinearLayout;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -62,7 +63,7 @@ public class RecyclerManager extends RecyclerView.Adapter<RecyclerManager.ViewHo
         TextView CityNameTV;
         TextView LatItemTV;
         TextView LngItemTV;
-        ExpandableRelativeLayout expandableRelativeLayout;
+        ExpandableLinearLayout expandableLinearLayout;
         LatLng latLng;
         CameraUpdate update;
         GoogleMap CurrentGoogleMap;
@@ -70,8 +71,8 @@ public class RecyclerManager extends RecyclerView.Adapter<RecyclerManager.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            expandableRelativeLayout= (ExpandableRelativeLayout) itemView.findViewById(R.id.ExpandableLatLngLayout);
-            expandableRelativeLayout.toggle();
+            expandableLinearLayout= (ExpandableLinearLayout) itemView.findViewById(R.id.ExpandableLatLngLayout);
+            expandableLinearLayout.toggle();
             CityNameTV= (TextView) itemView.findViewById(R.id.CItyNameTV);
             LatItemTV= (TextView) itemView.findViewById(R.id.LatItemTV);
             LngItemTV= (TextView) itemView.findViewById(R.id.LngItemTV);
@@ -84,7 +85,7 @@ public class RecyclerManager extends RecyclerView.Adapter<RecyclerManager.ViewHo
             CityNameTV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!expandableRelativeLayout.isExpanded()) {
+                    if (!expandableLinearLayout.isExpanded()) {
                    mapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
@@ -103,12 +104,12 @@ public class RecyclerManager extends RecyclerView.Adapter<RecyclerManager.ViewHo
                         }
                     });
 
-                                expandableRelativeLayout.expand();
+                        expandableLinearLayout.expand();
 
                                 LatItemTV.setText("lat: " + locationObj.lat);
                                 LngItemTV.setText(" lng: " + locationObj.lng);
-                            } else if (expandableRelativeLayout.isExpanded()) {
-                                expandableRelativeLayout.collapse();
+                            } else if (expandableLinearLayout.isExpanded()) {
+                        expandableLinearLayout.collapse();
                             }
                         }
                     });

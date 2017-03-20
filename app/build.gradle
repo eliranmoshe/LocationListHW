@@ -31,5 +31,7 @@ dependencies {
     compile 'com.android.support:design:25.2.0'
     compile 'com.google.android.gms:play-services-maps:10.2.0'
     compile 'com.levelupstudio:expandable-recyclerview:1.0.1'
-    compile 'com.github.aakira:expandable-layout:1.4.2@aar'
+    compile 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
+    compile 'com.levelupstudio:expandable-recyclerview:1.0.1'
+    compile 'com.github.aakira:expandable-layout:1.6.0@aar'
 }
